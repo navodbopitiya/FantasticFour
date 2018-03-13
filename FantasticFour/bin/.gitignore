@@ -1,3 +1,9 @@
 /.classpath
 /.project
 /.settings/
+/Model/
+/View/
+/Controller/
+/model/
+/controller/
+/view/
