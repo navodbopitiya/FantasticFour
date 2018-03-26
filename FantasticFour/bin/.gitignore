@@ -1,7 +1,2 @@
-/.classpath
-/.project
-/.settings/
 /controller/
-/model/
 /view/
-/Game.class
