@@ -3,14 +3,21 @@
  */
 package controller;
 
+<<<<<<< HEAD
 import javafx.application.Application;
 import view.MainMenuView;
 
+=======
+import view.Board;
+import model.GameConstants.GAME_STATE;
+import model.Player;
+>>>>>>> origin/master
 
 /**
  * @author Navod Bopitiya
  *
  */
+<<<<<<< HEAD
 public class GameEngine {
 	
 	private String playerOneName, playerTwoName;
@@ -31,6 +38,38 @@ public class GameEngine {
 	public void startGame(){
 		Application.launch(MainMenuView.class);
 		System.out.println("Just checking");
+=======
+public class GameEngine implements CheckGameState
+{
+	private GAME_STATE gameStauts = GAME_STATE.NITIALIZED;
+	
+	/**
+	 * Access the Board class
+	 */
+	private Board board;
+	
+	/**
+	 * Access the playerA class
+	 */
+	private Player playerA;
+	
+	/**
+	 * Access the playerB class
+	 */
+	private Player playerB;
+	
+	/**
+	 * whose turn
+	 */
+	private Player currentPlayer;
+
+	
+	@Override
+	public Player getWinner()
+	{
+		// TODO Auto-generated method stub
+		return null;
+>>>>>>> origin/master
 	}
 
 }
