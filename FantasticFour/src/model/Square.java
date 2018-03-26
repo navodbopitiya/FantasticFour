@@ -3,17 +3,21 @@
  */
 package model;
 
+import javax.swing.JButton;
+
 /**
  * @author Navod Bopitiya
  *
  */
-public class Square {
+public class Square extends JButton 
+{
 	private int positionX, positionY;
 	private boolean occupied;
 	private int size;
 	private boolean colour;
 	
-	public int getPositionX() {
+	public int getPositionX() 
+	{
 		return positionX;
 	}
 
