@@ -11,14 +11,51 @@ import model.GameConstants.PLAYER_SIDE;
  */
 public class Player 
 {
-
+	/**
+	 * the player name
+	 */
 	private String playername;
-	private Piece[] pieces;
+	
+	/**
+	 * the side of player,could be north or south
+	 * to distingush is it PlayerA or PlayerB 
+	 */
 	private PLAYER_SIDE sidePosition;
+	
+	/**
+	 * to store pieces in the legend area
+	 */
+	private Piece[] piecesLegend;
+	
+	/**
+	 * to hold the pieces in the board
+	 */
+	private Piece[] pieces;
+	
 	
 	public Player(PLAYER_SIDE sidePosition)
 	{
+		int num = GameConstants.NUMBER_OF_LEGEND_SQUARE * GameConstants.NUMBER_OF_PIECES_LEGEND;
 		this.sidePosition = sidePosition;
+		this.piecesLegend = new Piece[num];
+		if (sidePosition==PLAYER_SIDE.NORTH)
+		{
+			piecesLegend[0] = new Soldier();
+			piecesLegend[1] = new Soldier();
+			piecesLegend[2] = new Soldier();
+			piecesLegend[3] = new Soldier();
+			piecesLegend[4] = new Soldier();
+			piecesLegend[5] = new Soldier();
+		}
+		if (sidePosition==PLAYER_SIDE.SOUTH)
+		{
+			piecesLegend[0] = new Soldier();
+			piecesLegend[1] = new Soldier();
+			piecesLegend[2] = new Soldier();
+			piecesLegend[3] = new Soldier();
+			piecesLegend[4] = new Soldier();
+			piecesLegend[5] = new Soldier();
+		}
 	}
 	
 	public String getPlayername()
