@@ -21,6 +21,10 @@ import controller.GameEngine;
 
 public class MainMenuView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	public static final Pattern PATTERN = Pattern.compile("^\\d+$"); //pattern for numeric inputs
 	private GameEngine gameEngine;
@@ -63,7 +67,7 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(lblPlayerOne);
 		
 		/*TextField for Player One*/
-		JTextField playerOneTextField = new JTextField();
+		final JTextField playerOneTextField = new JTextField();
 		playerOneTextField.setBounds(174, 80, 168, 23);
 		frame.getContentPane().add(playerOneTextField);
 		playerOneTextField.setColumns(10);
@@ -76,7 +80,7 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(lblPlayerTwo);
 		
 		/*TextField for Player Two*/
-		JTextField playerTwoTextField = new JTextField();
+		final JTextField playerTwoTextField = new JTextField();
 		playerTwoTextField.setBounds(174, 120, 168, 23);
 		frame.getContentPane().add(playerTwoTextField);
 		playerTwoTextField.setColumns(10);
@@ -89,7 +93,7 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(timerlbl);
 
 		/*TextField for Timer*/
-		JTextField timerTextField = new JTextField();
+		final JTextField timerTextField = new JTextField();
 		timerTextField.setBounds(174, 160, 168, 23);
 		frame.getContentPane().add(timerTextField);
 		timerTextField.setColumns(10);
