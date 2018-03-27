@@ -31,6 +31,8 @@ public class Game
 				}
 			}
 		});
+		GameEngine gameEngine = new GameEngine();
+		gameEngine.startMainMenu();
 	}
 
 	/**

@@ -1,73 +1,111 @@
 package view;
-	
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.regex.Pattern;
 
-public class MainMenuView extends Application {
-	@Override
-	public void start(Stage primaryStage) {
-		try {
-			GridPane grid = new GridPane();
-			grid.setAlignment(Pos.CENTER);
-			grid.setHgap(10);
-			grid.setVgap(10);
-			grid.setPadding(new Insets(25,25,25,25));
-			
-			Text scenetitle = new Text("Main Menu");
-			scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-			grid.add(scenetitle, 0, 0, 2, 1);
-			
-			Label playerOneLabel = new Label("Player One Name");
-			grid.add(playerOneLabel, 0, 1);
-			
-			TextField playerOneTextField = new TextField();
-			grid.add(playerOneTextField, 1, 1);
-			
-			Label playerTwoLabel = new Label("Player Two Name");
-			grid.add(playerTwoLabel, 0, 2);
-			
-			TextField playerTwoTextField = new TextField();
-			grid.add(playerTwoTextField, 1, 2);
-			
-			Label timerText = new Label("Round Time");
-			grid.add(timerText, 0, 3);
-			
-			TextField timerTextField = new TextField();
-			grid.add(timerTextField, 1, 3);
-			
-			Button btn =  new Button("Play Game");
-			HBox hbBtn = new HBox(10);
-			hbBtn.setAlignment(Pos.BOTTOM_RIGHT);
-			hbBtn.getChildren().add(btn);
-			grid.add(hbBtn, 1, 4);
-			
-			
-			Scene scene = new Scene(grid,400,275);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import controller.GameEngine;
+
+public class MainMenuView extends JFrame {
+
+	private JFrame frame;
+	public static final Pattern PATTERN = Pattern.compile("^\\d+$");
+	private GameEngine gameEngine;
+
+	public void run() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 	
-	 @Override
-	   public void init()
-	   {
-	      System.out.printf("init() called on thread %s%n", 
-	                        Thread.currentThread());
-	   }
+
+	public MainMenuView(GameEngine gameEngine) {
+		this.gameEngine = gameEngine;
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.getContentPane().setBackground(new Color(27, 91, 127));
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+
+		JLabel lblPlayerOne = new JLabel("Player One");
+		lblPlayerOne.setForeground(Color.ORANGE);
+		lblPlayerOne.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPlayerOne.setBounds(58, 80, 120, 23);
+		frame.getContentPane().add(lblPlayerOne);
+
+		JTextField playerOneTextField = new JTextField();
+		playerOneTextField.setBounds(174, 80, 168, 23);
+		frame.getContentPane().add(playerOneTextField);
+		playerOneTextField.setColumns(10);
+
+		JLabel lblPlayerTwo = new JLabel("Player Two");
+		lblPlayerTwo.setForeground(Color.ORANGE);
+		lblPlayerTwo.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPlayerTwo.setBounds(58, 120, 120, 23);
+		frame.getContentPane().add(lblPlayerTwo);
+
+		JTextField playerTwoTextField = new JTextField();
+		playerTwoTextField.setBounds(174, 120, 168, 23);
+		frame.getContentPane().add(playerTwoTextField);
+		playerTwoTextField.setColumns(10);
+
+		JLabel timerlbl = new JLabel("Round Time (s)");
+		timerlbl.setForeground(Color.ORANGE);
+		timerlbl.setFont(new Font("Arial", Font.BOLD, 13));
+		timerlbl.setBounds(58, 160, 120, 23);
+		frame.getContentPane().add(timerlbl);
+
+		JTextField timerTextField = new JTextField();
+		timerTextField.setBounds(174, 160, 168, 23);
+		frame.getContentPane().add(timerTextField);
+		timerTextField.setColumns(10);
+
+		JButton btnLogin = new JButton("Play");
+		btnLogin.setBackground(Color.ORANGE);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (playerOneTextField.getText() != null && playerTwoTextField.getText() != null
+						&& timerTextField.getText() != null) {
+					if (PATTERN.matcher(timerTextField.getText()).matches()) {
+						gameEngine.setPlayerOneName(playerOneTextField.getText());
+						gameEngine.setPlayerTwoName(playerTwoTextField.getText());
+						gameEngine.setTimerValue(Integer.parseInt(timerTextField.getText()));
+						gameEngine.printText();
+					}
+
+				}
+				
+			}
+
+		});
+		btnLogin.setBounds(174, 210, 79, 23);
+		frame.getContentPane().add(btnLogin);
+
+	}
+
 }
