@@ -35,6 +35,7 @@ public class MainMenuView extends JFrame {
 				}
 			}
 		});
+		
 
 	}
 	
@@ -45,6 +46,7 @@ public class MainMenuView extends JFrame {
 	}
 
 	private void initialize() {
+		gameEngine.setDataEnteredValue(false);
 		/*Create new frame*/
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -104,9 +106,15 @@ public class MainMenuView extends JFrame {
 						gameEngine.setPlayerOneName(playerOneTextField.getText());
 						gameEngine.setPlayerTwoName(playerTwoTextField.getText());
 						gameEngine.setTimerValue(Integer.parseInt(timerTextField.getText()));
+						gameEngine.setDataEnteredValue(true);
+						frame.dispose();
 						gameEngine.printText();
+					}else{
+						gameEngine.setDataEnteredValue(false);
 					}
 
+				}else{
+					gameEngine.setDataEnteredValue(false);
 				}
 				
 			}
