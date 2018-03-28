@@ -33,7 +33,7 @@ public class Player
 	private Piece[] pieces;
 	
 	
-	public Player(PLAYER_SIDE sidePosition)
+	public Player(PLAYER_SIDE sidePosition,String name)
 	{
 		int num = GameConstants.NUMBER_OF_LEGEND_SQUARE * GameConstants.NUMBER_OF_PIECES_LEGEND;
 		this.sidePosition = sidePosition;
@@ -56,6 +56,8 @@ public class Player
 			piecesLegend[4] = new Soldier();
 			piecesLegend[5] = new Soldier();
 		}
+		
+		this.playername = name;
 	}
 	
 	public String getPlayername()

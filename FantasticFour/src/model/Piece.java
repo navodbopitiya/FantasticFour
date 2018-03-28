@@ -14,29 +14,22 @@ public abstract class  Piece {
 	 * -knows its next legal attack
 	 * -knows when it is attacked by other player: removal
 	 */
-	
-	private Player player;
 	private Square coordinate;
 	private int moveMax, attackRange;
 	private Integer[] moveDirections, attackDirections;
 		
+	public Piece()
+	{
+		;
+	}
+	public Piece(Square coordinate, int moveMax, int attackRange) 
+	{
 		
-	public Piece(Player player, Square coordinate, int moveMax, int attackRange) {
-		
-		this.player = player;
 		this.coordinate = coordinate;
 		this.moveMax = moveMax;
 		this.attackRange = attackRange;
 	}
 
-	public void setPlayer(Player player){
-		this.player = player;
-	}
-	
-	public Player getPlayerName(){
-		return player;
-	}
-	
 	public void setCoordinate(Square coordinate){
 		if (coordinate.isOccupied()== false)
 			this.coordinate = coordinate;

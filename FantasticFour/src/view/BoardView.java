@@ -5,43 +5,44 @@ package view;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-
 import controller.GameEngine;
-import view.Board;
 
 
-public class BoardView {
+public class BoardView 
+{
+	private Board boardFrame;
 	
-	private Board frame;
 	private GameEngine gameEngine;
 
-	public BoardView(GameEngine gameEngine){
+	public BoardView(GameEngine gameEngine)
+	{
 		this.gameEngine = gameEngine;
+		this.boardFrame = gameEngine.getBoardFrame();
 		initialize();
 	}
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize()
 	
 	{
-		System.out.println("You are in initialize -BoardView"); //TODO- remove test print
-		frame = new Board();
-		frame.setBoardPanel();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//TODO- remove test print
+		System.out.println("You are in initialize -BoardView");
+		System.out.println(gameEngine.getPlayerA().getPlayername());
+		System.out.println(gameEngine.getPlayerB().getPlayername());
 	}
 	
-	public void run(){
-		System.out.println("You are in run -BoardView"); //TODO- remove test print
+	public void display()
+	{
+		System.out.println("You are in run -BoardView");
 		EventQueue.invokeLater(new Runnable()
 		{
 			public void run()
 			{
 				try 
 				{
-					
-					frame.setVisible(true);
+					boardFrame.setVisible(true);
 				} catch (Exception e)
 				{
 					e.printStackTrace();

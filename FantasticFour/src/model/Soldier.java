@@ -1,10 +1,12 @@
 package model;
 
-public class Soldier extends Piece{
+public class Soldier extends Piece
+{
 
-	public Soldier(Player player, Square coordinate, int moveMax, int attackRange) {
-		super(player, coordinate, moveMax, attackRange);
-		// TODO Auto-generated constructor stub
+	
+	public Soldier()
+	{
+		;
 	}
 
 	private final int MOVE_MAX = 1;

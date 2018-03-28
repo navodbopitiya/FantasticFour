@@ -8,6 +8,11 @@ public class GameConstants
 	
 	public static int NUMBER_OF_LEGEND_SQUARE = 3;
 	
+	/**
+	 * how many pieces are there in one category 
+	 */
+	public static int NUMBER_OF_PIECES_LEGEND = 2;
+	
 	public static enum GAME_STATE
 	{
 		NITIALIZED, SETTLE, PLAYING, PAUSED, GAMEOVER
@@ -17,5 +22,7 @@ public class GameConstants
 	{
 		NORTH, SOUTH
 	}
+	
+	public static int LENGTH_OF_NAME = 200;
 	
 }

@@ -6,15 +6,23 @@ package model;
 import javax.swing.JButton;
 
 /**
- * @author Navod Bopitiya
- *
+ * The basic Square of the board
+ * @author Jason.Zhuang
+ * @studentId s3535252
+ * Mar 28, 2018
+ * Square.java
+ * Describe:
  */
 public class Square extends JButton 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int positionX, positionY;
+	
 	private boolean occupied;
-	private int size;
-	private boolean colour;
 	
 	public int getPositionX() 
 	{
