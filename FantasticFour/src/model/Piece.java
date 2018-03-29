@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public abstract class  Piece {
 	
 	/*
@@ -14,24 +16,40 @@ public abstract class  Piece {
 	 * -knows its next legal attack
 	 * -knows when it is attacked by other player: removal
 	 */
+	
+	
+	/*===================
+	 * PIECE CONSTANTS
+	 *===================
+	 */
+	public static final int RANGE_ONE = 1;
+	public static final int RANGE_TWO = 2;
+	public static final int RANGE_THREE = 3;
+	public static final int RANGE_MAX = 1;
+	
+	/*===================
+	 * PIECE DEFINITION
+	 *===================
+	 */
+	private Player player;
 	private Square coordinate;
-	private int moveMax, attackRange;
-	private Integer[] moveDirections, attackDirections;
 		
-	public Piece()
-	{
-		;
-	}
-	public Piece(Square coordinate, int moveMax, int attackRange) 
-	{
+	public Piece(Player player, Square coordinate) {
 		
+		this.player = player;
 		this.coordinate = coordinate;
-		this.moveMax = moveMax;
-		this.attackRange = attackRange;
 	}
 
+	public void setPlayer(Player player){
+		this.player = player;
+	}
+	
+	public Player getPlayer(){
+		return player;
+	}
+	
 	public void setCoordinate(Square coordinate){
-		if (coordinate.isOccupied()== false)
+		if (!coordinate.isOccupied())
 			this.coordinate = coordinate;
 		else
 			System.out.println("square is occupied");
@@ -41,80 +59,86 @@ public abstract class  Piece {
 		return coordinate;
 	}
 	
-	public int getMoveMax() {
-		return moveMax;
-	}
-	
-	public int getAttackRange() {
-		return attackRange;
-	}
-	
-	public boolean captureFlag(){
+	//Not sure how to write this yet
+	public boolean captureFlag(Flag enemyFlag){
 		//get flag location
 		//if flag not ours and within move range
+		// set flag as captured 
 		//return true
+		
+		//flag.getLocation();
 		
 		return true;
 	}
 	
-	public Integer[] getMoveDirections() {
-		return moveDirections;
+	public abstract int getMoveRange();
+	public abstract ArrayList<Square> getMoveDirection();
+	public abstract void move(Square location);
+	
+	public abstract int getAttackRange();
+	public abstract ArrayList<Square> getAttackDirection();
+	public abstract void attack(Square location, Piece enemyPiece);
+	
+	
+	
+	/*===================
+	 * PIECE DIRECTIONS
+	 *===================
+	 */
+	public Square dirNorth(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX());
+		nextSquare.setPositionY(coordinate.getPositionY() + range);
+		return nextSquare;
 	}
-	public Integer[] getAttackDirections() {
-		return attackDirections;
+	
+	public Square dirNorthEast(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX() + range);
+		nextSquare.setPositionY(coordinate.getPositionY() + range);
+		return nextSquare;
 	}
 	
+	public Square dirEast(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX() + range);
+		nextSquare.setPositionY(coordinate.getPositionY());
+		return nextSquare;
+	}
 	
+	public Square dirSouthEast(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX() + range);
+		nextSquare.setPositionY(coordinate.getPositionY() - range);
+		return nextSquare;
+	}
 	
-	public abstract void move();
-	public abstract void attack();
+	public Square dirSouth(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX());
+		nextSquare.setPositionY(coordinate.getPositionY() - range);
+		return nextSquare;
+	}
 	
+	public Square dirSouthWest(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX() - range);
+		nextSquare.setPositionY(coordinate.getPositionY() - range);
+		return nextSquare;
+	}
 	
+	public Square dirWest(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX() - range);
+		nextSquare.setPositionY(coordinate.getPositionY());
+		return nextSquare;
+	}
 	
-	
-	
-//	private String pieceName;
-//	private int moveMax, attackRange, locationX, locationY;
-//	private Integer[] pieceCapability, moveDirections, attackDirections;
-//	
-//	
-//	public int getLocationX() {
-//		return locationX;
-//	}
-//	public void setLocationX(int locationX) {
-//		this.locationX = locationX;
-//	}
-//	public int getLocationY() {
-//		return locationY;
-//	}
-//	public void setLocationY(int locationY) {
-//		this.locationY = locationY;
-//	}
-//	public String getPieceName() {
-//		return pieceName;
-//	}
-//	public boolean captureFlag(){
-//		return true;
-//	}
-//	
-//	public int getMoveMax() {
-//		return moveMax;
-//	}
-//	public int getAttackRange() {
-//		return attackRange;
-//	}
-//	public Integer[] getPieceCapability() {
-//		return pieceCapability;
-//	}
-//	public Integer[] getMoveDirections() {
-//		return moveDirections;
-//	}
-//	public Integer[] getAttackDirections() {
-//		return attackDirections;
-//	}
-//	
-//	
-//	public abstract void move();
-//	public abstract void attack();
+	public Square dirNorthWest(int range){
+		Square nextSquare = new Square();
+		nextSquare.setPositionX(coordinate.getPositionX() - range);
+		nextSquare.setPositionY(coordinate.getPositionY() + range);
+		return nextSquare;
+	}
 
 }
