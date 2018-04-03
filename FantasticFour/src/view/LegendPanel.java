@@ -1,13 +1,12 @@
 package view;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Label;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
 import model.GameConstants;
 import model.GameConstants.PLAYER_SIDE;
@@ -30,6 +29,10 @@ public class LegendPanel extends JPanel
 	
 	private int legendHeight;
 	
+	private Label lblPlayerName; 
+
+	private Button btnGo;
+	
 	private LegendSquare[] legendSquares;
 	
 	public LegendPanel(Player argPlayer)
@@ -39,11 +42,7 @@ public class LegendPanel extends JPanel
 		this.sidePosition = argPlayer.getSidePosition();
 		this.boardWidth  = GameConstants.SIZE_OF_SQUARE * GameConstants.NUMBER_OF_BOARD_SQUARE;
 		this.boardHeight = GameConstants.SIZE_OF_SQUARE * GameConstants.NUMBER_OF_BOARD_SQUARE;
-		
-		//this.legendWidth = (GameConstants.SIZE_OF_SQUARE * GameConstants.NUMBER_OF_LEGEND_SQUARE) 
-		//		+ GameConstants.LENGTH_OF_NAME + 50;
 		this.legendWidth = this.boardWidth;
-		
 		this.legendHeight= GameConstants.SIZE_OF_SQUARE;
 		
 		int x = (boardWidth/2) - (legendWidth/2);
@@ -60,39 +59,50 @@ public class LegendPanel extends JPanel
 		this.setBounds(x, y, legendWidth, legendHeight);
 		//FlowLayout flowLayout = (FlowLayout) this.getLayout();
 		//flowLayout.setAlignment(FlowLayout.CENTER);
-		this.setLayout(new FlowLayout(FlowLayout.CENTER, 2, 1));
+		FlowLayout flow_panel = new FlowLayout(FlowLayout.CENTER, 2, 2);
+		flow_panel.setAlignOnBaseline(true);
+		this.setLayout(flow_panel);
 	}
 	
 	public void addNameLabel()
 	{
-		JLabel lblPlayerA = new JLabel(player.getPlayername());
-		lblPlayerA.setBorder(new LineBorder(new Color(0, 0, 0)));
+		lblPlayerName = new Label(player.getPlayername());
 		if (player.getSidePosition() == PLAYER_SIDE.NORTH)
 		{
-			lblPlayerA.setForeground(Color.RED);
+			lblPlayerName.setForeground(Color.RED);
 		}else
 		{
-			lblPlayerA.setForeground(Color.BLUE);
+			lblPlayerName.setForeground(Color.BLUE);
 		}
-		lblPlayerA.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPlayerA.setPreferredSize(new Dimension(GameConstants.LENGTH_OF_NAME, this.legendHeight));
-		this.add(lblPlayerA);
+		lblPlayerName.setAlignment(Label.CENTER);
+		lblPlayerName.setPreferredSize(new Dimension(GameConstants.LENGTH_OF_NAME, this.legendHeight));
+		this.add(lblPlayerName);
 	}
 	
-	public void addLegendPiece(LegendSquare ls)
+	public void addLegendPiece(LegendSquare square)
 	{
-		ls.setPreferredSize(new Dimension(GameConstants.SIZE_OF_SQUARE, GameConstants.SIZE_OF_SQUARE));
 		for(int i=0;i<legendSquares.length;i++)
 		{
 			if (legendSquares[i] == null)
 			{
-				legendSquares[i] = ls;
+				legendSquares[i] = square;
 				break;
 			}
 		}
-		this.add(ls);
+		this.add(square);
 	}
-
+	
+	public void addButton()
+	{
+		btnGo = new Button();
+		String btnName = "btnGo"+player.getPlayername();
+		btnGo.setName(btnName);
+		btnGo.setLabel("GO");
+		btnGo.setPreferredSize(new Dimension(80, 50));
+		btnGo.setEnabled(false);
+		this.add(btnGo);
+	}
+	
 	public Player getPlayer()
 	{
 		return player;
@@ -117,5 +127,24 @@ public class LegendPanel extends JPanel
 	{
 		return legendSquares;
 	}
-	
+
+	public Label getLblPlayerName()
+	{
+		return lblPlayerName;
+	}
+
+	public void setLblPlayerName(Label lblPlayerName)
+	{
+		this.lblPlayerName = lblPlayerName;
+	}
+
+	public Button getBtnGo()
+	{
+		return btnGo;
+	}
+
+	public void setBtnGo(Button btnGo)
+	{
+		this.btnGo = btnGo;
+	}
 }

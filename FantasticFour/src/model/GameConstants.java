@@ -15,7 +15,7 @@ public class GameConstants
 	
 	public static enum GAME_STATE
 	{
-		NITIALIZED, SETTLE, PLAYING, PAUSED, GAMEOVER
+		INITIALIZED, PLAYING, PAUSED, GAMEOVER
 	}
 	
 	public static enum PLAYER_SIDE

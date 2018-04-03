@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-
 public abstract class  Piece {
 	
 	/*
@@ -16,129 +14,128 @@ public abstract class  Piece {
 	 * -knows its next legal attack
 	 * -knows when it is attacked by other player: removal
 	 */
+	protected String id;
 	
+	protected String name;
 	
-	/*===================
-	 * PIECE CONSTANTS
-	 *===================
-	 */
-	public static final int RANGE_ONE = 1;
-	public static final int RANGE_TWO = 2;
-	public static final int RANGE_THREE = 3;
-	public static final int RANGE_MAX = 1;
+	protected Square coordinate;
 	
-	/*===================
-	 * PIECE DEFINITION
-	 *===================
-	 */
-	private Player player;
-	private Square coordinate;
+	protected int moveMax;
+	
+	protected int attackRange;
+	
+	protected int[] moveDirections;
+	
+	protected int[] attackDirections;
+	
+	protected Player player;
 		
-	public Piece(Player player, Square coordinate) {
+	public Piece(String id)
+	{
+		this.id = id;
+	}
+	
+	public Piece(Square coordinate, int moveMax, int attackRange) 
+	{
 		
-		this.player = player;
 		this.coordinate = coordinate;
+		this.moveMax = moveMax;
+		this.attackRange = attackRange;
 	}
 
-	public void setPlayer(Player player){
-		this.player = player;
-	}
-	
-	public Player getPlayer(){
-		return player;
-	}
-	
-	public void setCoordinate(Square coordinate){
-		if (!coordinate.isOccupied())
+	public void setCoordinate(Square coordinate)
+	{
+		if (coordinate.isOccupied()== false)
 			this.coordinate = coordinate;
 		else
 			System.out.println("square is occupied");
 	}
 	
-	public Square getCoordinate(){
-		return coordinate;
-	}
-	
-	//Not sure how to write this yet
-	public boolean captureFlag(Flag enemyFlag){
+	public boolean captureFlag(){
 		//get flag location
 		//if flag not ours and within move range
-		// set flag as captured 
 		//return true
-		
-		//flag.getLocation();
 		
 		return true;
 	}
-	
-	public abstract int getMoveRange();
-	public abstract ArrayList<Square> getMoveDirection();
-	public abstract void move(Square location);
-	
-	public abstract int getAttackRange();
-	public abstract ArrayList<Square> getAttackDirection();
-	public abstract void attack(Square location, Piece enemyPiece);
-	
-	
-	
-	/*===================
-	 * PIECE DIRECTIONS
-	 *===================
-	 */
-	public Square dirNorth(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX());
-		nextSquare.setPositionY(coordinate.getPositionY() + range);
-		return nextSquare;
-	}
-	
-	public Square dirNorthEast(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX() + range);
-		nextSquare.setPositionY(coordinate.getPositionY() + range);
-		return nextSquare;
-	}
-	
-	public Square dirEast(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX() + range);
-		nextSquare.setPositionY(coordinate.getPositionY());
-		return nextSquare;
-	}
-	
-	public Square dirSouthEast(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX() + range);
-		nextSquare.setPositionY(coordinate.getPositionY() - range);
-		return nextSquare;
-	}
-	
-	public Square dirSouth(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX());
-		nextSquare.setPositionY(coordinate.getPositionY() - range);
-		return nextSquare;
-	}
-	
-	public Square dirSouthWest(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX() - range);
-		nextSquare.setPositionY(coordinate.getPositionY() - range);
-		return nextSquare;
-	}
-	
-	public Square dirWest(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX() - range);
-		nextSquare.setPositionY(coordinate.getPositionY());
-		return nextSquare;
-	}
-	
-	public Square dirNorthWest(int range){
-		Square nextSquare = new Square();
-		nextSquare.setPositionX(coordinate.getPositionX() - range);
-		nextSquare.setPositionY(coordinate.getPositionY() + range);
-		return nextSquare;
+
+	//abstract method
+	public abstract void move();
+	public abstract void attack();
+
+	// get and set /////////////////////
+	public String getId()
+	{
+		return id;
 	}
 
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public int getMoveMax()
+	{
+		return moveMax;
+	}
+
+	public void setMoveMax(int moveMax)
+	{
+		this.moveMax = moveMax;
+	}
+
+	public int getAttackRange()
+	{
+		return attackRange;
+	}
+
+	public void setAttackRange(int attackRange)
+	{
+		this.attackRange = attackRange;
+	}
+	
+	public int[] getMoveDirections()
+	{
+		return moveDirections;
+	}
+
+	public void setMoveDirections(int[] moveDirections)
+	{
+		this.moveDirections = moveDirections;
+	}
+
+	public int[] getAttackDirections()
+	{
+		return attackDirections;
+	}
+
+	public void setAttackDirections(int[] attackDirections)
+	{
+		this.attackDirections = attackDirections;
+	}
+
+	public Square getCoordinate()
+	{
+		return coordinate;
+	}
+
+	public Player getPlayer()
+	{
+		return player;
+	}
+
+	public void setPlayer(Player player)
+	{
+		this.player = player;
+	}
 }

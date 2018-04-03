@@ -3,15 +3,8 @@ package view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.regex.Pattern;
 
-import javax.imageio.ImageIO;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,10 +14,6 @@ import controller.GameEngine;
 
 public class MainMenuView extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	public static final Pattern PATTERN = Pattern.compile("^\\d+$"); //pattern for numeric inputs
 	private GameEngine gameEngine;
@@ -39,7 +28,6 @@ public class MainMenuView extends JFrame {
 				}
 			}
 		});
-		
 
 	}
 	
@@ -50,7 +38,6 @@ public class MainMenuView extends JFrame {
 	}
 
 	private void initialize() {
-		gameEngine.setDataEnteredValue(false);
 		/*Create new frame*/
 		frame = new JFrame();
 		frame.setResizable(false);
@@ -67,7 +54,7 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(lblPlayerOne);
 		
 		/*TextField for Player One*/
-		final JTextField playerOneTextField = new JTextField();
+		JTextField playerOneTextField = new JTextField();
 		playerOneTextField.setBounds(174, 80, 168, 23);
 		frame.getContentPane().add(playerOneTextField);
 		playerOneTextField.setColumns(10);
@@ -80,7 +67,7 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(lblPlayerTwo);
 		
 		/*TextField for Player Two*/
-		final JTextField playerTwoTextField = new JTextField();
+		JTextField playerTwoTextField = new JTextField();
 		playerTwoTextField.setBounds(174, 120, 168, 23);
 		frame.getContentPane().add(playerTwoTextField);
 		playerTwoTextField.setColumns(10);
@@ -93,7 +80,7 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(timerlbl);
 
 		/*TextField for Timer*/
-		final JTextField timerTextField = new JTextField();
+		JTextField timerTextField = new JTextField();
 		timerTextField.setBounds(174, 160, 168, 23);
 		frame.getContentPane().add(timerTextField);
 		timerTextField.setColumns(10);
@@ -101,29 +88,26 @@ public class MainMenuView extends JFrame {
 		/* Play button action */
 		JButton btnPlay = new JButton("Play");
 		btnPlay.setBackground(Color.ORANGE);
-		btnPlay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (playerOneTextField.getText() != null && playerTwoTextField.getText() != null
-						&& timerTextField.getText() != null) { /*Check for null fields */
-					if (PATTERN.matcher(timerTextField.getText()).matches()) { /*Check for non-numeric inputs for timer using a pattern*/
-						/*Set player and timer data in gameEngine*/
-						gameEngine.setPlayerOneName(playerOneTextField.getText());
-						gameEngine.setPlayerTwoName(playerTwoTextField.getText());
-						gameEngine.setTimerValue(Integer.parseInt(timerTextField.getText()));
-						gameEngine.setDataEnteredValue(true);
-						frame.dispose();
-						gameEngine.printText();
-					}else{
-						gameEngine.setDataEnteredValue(false);
-					}
-
-				}else{
-					gameEngine.setDataEnteredValue(false);
-				}
-				
-			}
-
-		});
+//		btnPlay.addActionListener(
+//				
+//				new ActionListener() 
+//				{
+//				public void actionPerformed(ActionEvent arg0) {
+//					if (playerOneTextField.getText() != null && playerTwoTextField.getText() != null
+//							&& timerTextField.getText() != null) { /*Check for null fields */
+//						if (PATTERN.matcher(timerTextField.getText()).matches()) { /*Check for non-numeric inputs for timer using a pattern*/
+//							/*Set player and timer data in gameEngine*/
+//							gameEngine.setPlayerOneName(playerOneTextField.getText());
+//							gameEngine.setPlayerTwoName(playerTwoTextField.getText());
+//							gameEngine.setTimerValue(Integer.parseInt(timerTextField.getText()));
+//							gameEngine.printText();
+//						}
+//	
+//					}
+//					
+//			}
+//
+//		});
 		btnPlay.setBounds(174, 210, 79, 23);
 		frame.getContentPane().add(btnPlay);
 

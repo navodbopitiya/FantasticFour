@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 
 import model.GameConstants.GAME_STATE;
 import model.GameConstants.PLAYER_SIDE;
+import model.LegendSquare;
+import model.Piece;
 import model.Player;
 import view.Board;
 import view.BoardView;
@@ -19,7 +21,7 @@ public class GameEngine implements CheckGameState
 	 * the game state
 	 * could be NITIALIZED, SETTLE, PLAYING, PAUSED, GAMEOVER
 	 */
-	private GAME_STATE gameStauts = GAME_STATE.NITIALIZED;
+	private static GAME_STATE gameStauts = GAME_STATE.INITIALIZED;
 	
 	/**
 	 * Access the Board class
@@ -29,17 +31,27 @@ public class GameEngine implements CheckGameState
 	/**
 	 * Access the playerA class
 	 */
-	private Player playerA;
+	private static Player playerA;
 	
 	/**
 	 * Access the playerB class
 	 */
-	private Player playerB;
+	private static Player playerB;
 	
 	/**
 	 * whose turn
 	 */
-	private Player currentPlayer;
+	private static Player currentPlayer;
+	
+	/**
+	 * Current Legend Piece
+	 */
+	private static Piece currentPiece;
+	
+	/**
+	 * Current Legend Square
+	 */
+	private static LegendSquare currentLegendSquare;
 	
 	/**
 	 * time limitation per round
@@ -47,14 +59,20 @@ public class GameEngine implements CheckGameState
 	private int timerValue;
 
 	/**
+	 * the view to display the game board
+	 */
+	private static BoardView boardView;
+	
+	/**
 	 * initializ two Players
 	 * @param PlayerA_name
 	 * @param PlayerB_name
 	 */
 	private void initPlayer(String PlayerA_name,String PlayerB_name)
 	{
-		this.playerA = new Player(PLAYER_SIDE.NORTH,PlayerA_name);
-		this.playerB = new Player(PLAYER_SIDE.SOUTH,PlayerB_name);
+		playerA = new Player(PLAYER_SIDE.NORTH,PlayerA_name);
+		playerB = new Player(PLAYER_SIDE.SOUTH,PlayerB_name);
+		currentPlayer = playerA;
 	}
 	
 	/**
@@ -65,11 +83,21 @@ public class GameEngine implements CheckGameState
 	private void initBoard()
 	{
 		boardFrame = new Board();
-		boardFrame.setBoardPanel();
 		boardFrame.setLegendPanel(playerA);
+		boardFrame.setBoardPanel();
 		boardFrame.setLegendPanel(playerB);
+		
+		LegendSquare[] ls = currentPlayer.getLegendPanel().getLegendSquares();
+		for(int i=0; i<ls.length; i++)
+		{
+			ls[i].setEnabled(true);
+		}
+		
+		currentPlayer.getLegendPanel().getBtnGo().setEnabled(true);
+		
 		boardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
 	
 	/**
 	 * start the login window
@@ -89,7 +117,6 @@ public class GameEngine implements CheckGameState
 	public void initialize(String PlayerA_name,String PlayerB_name,int timerValue) 
 	{
 		initPlayer(PlayerA_name, PlayerB_name);
-		this.currentPlayer = this.playerA;
 		this.timerValue = timerValue;
 		initBoard();
 	}
@@ -99,16 +126,51 @@ public class GameEngine implements CheckGameState
 	 */
 	public void openBoardView(GameEngine gameEngine)
 	{
-		BoardView boardView = new BoardView(gameEngine);
+		boardView = new BoardView(gameEngine);
 		boardView.display();
+	}
+	
+	public static void changePlayer()
+	{
+		if (currentPlayer == playerA)
+		{
+			currentPlayer = playerB;
+			playerA.getLegendPanel().getBtnGo().setEnabled(false);
+			playerA.getLegendPanel().getLblPlayerName().setText(playerA.getPlayername());
+			playerB.getLegendPanel().getBtnGo().setEnabled(true);
+			playerB.getLegendPanel().getLblPlayerName().setText("*"+playerB.getPlayername()+"*");
+			
+			
+		}else
+		{
+			currentPlayer = playerA;
+			playerA.getLegendPanel().getBtnGo().setEnabled(true);
+			playerA.getLegendPanel().getLblPlayerName().setText("*"+playerA.getPlayername()+"*");
+			
+			playerB.getLegendPanel().getBtnGo().setEnabled(false);
+			playerB.getLegendPanel().getLblPlayerName().setText(playerB.getPlayername());
+		}
+		playerA.setMoved(false);
+		playerB.setMoved(false);
+		
+		if (playerA.getLegendSquare().size() == 0 && playerB.getLegendSquare().size() == 0)
+		{
+			startGame();
+		}
+		
+		if (gameStauts==GAME_STATE.INITIALIZED)
+		{
+			LegendPanelController lpController = new LegendPanelController(currentPlayer);
+			lpController.setLegendEnable(true);
+		}
 	}
 	
 	/**
 	 * Start to play
 	 */
-	public void startGame()
+	public static void startGame()
 	{
-		;
+		gameStauts=GAME_STATE.PLAYING;
 	}
 	
 	/**
@@ -119,17 +181,16 @@ public class GameEngine implements CheckGameState
 	{
 		return null;
 	}
-
-	
 	///===get and set methods==============///
-	public GAME_STATE getGameStauts()
+
+	public static GAME_STATE getGameStauts()
 	{
 		return gameStauts;
 	}
 
-	public void setGameStauts(GAME_STATE gameStauts)
+	public static void setGameStauts(GAME_STATE gameStauts)
 	{
-		this.gameStauts = gameStauts;
+		GameEngine.gameStauts = gameStauts;
 	}
 
 	public Board getBoardFrame()
@@ -142,34 +203,54 @@ public class GameEngine implements CheckGameState
 		this.boardFrame = boardFrame;
 	}
 
-	public Player getPlayerA()
+	public static Player getPlayerA()
 	{
 		return playerA;
 	}
 
-	public void setPlayerA(Player playerA)
+	public static void setPlayerA(Player playerA)
 	{
-		this.playerA = playerA;
+		GameEngine.playerA = playerA;
 	}
 
-	public Player getPlayerB()
+	public static Player getPlayerB()
 	{
 		return playerB;
 	}
 
-	public void setPlayerB(Player playerB)
+	public static void setPlayerB(Player playerB)
 	{
-		this.playerB = playerB;
+		GameEngine.playerB = playerB;
 	}
 
-	public Player getCurrentPlayer()
+	public static Player getCurrentPlayer()
 	{
 		return currentPlayer;
 	}
 
-	public void setCurrentPlayer(Player currentPlayer)
+	public static void setCurrentPlayer(Player currentPlayer)
 	{
-		this.currentPlayer = currentPlayer;
+		GameEngine.currentPlayer = currentPlayer;
+	}
+	
+	public static Piece getCurrentPiece()
+	{
+		return currentPiece;
+	}
+
+	public static void setCurrentPiece(Piece currentPiece)
+	{
+		GameEngine.currentPiece = currentPiece;
+	}
+	
+	public static LegendSquare getCurrentLegendSquare()
+	{
+		return currentLegendSquare;
+	}
+
+	public static void setCurrentLegendSquare(LegendSquare currentLegendSquare)
+	{
+		GameEngine.currentLegendSquare = currentLegendSquare;
 	}
 
 	public int getTimerValue()
@@ -181,5 +262,17 @@ public class GameEngine implements CheckGameState
 	{
 		this.timerValue = timerValue;
 	}
+
+	public static BoardView getBoardView()
+	{
+		return boardView;
+	}
+
+	public static void setBoardView(BoardView boardView)
+	{
+		GameEngine.boardView = boardView;
+	}
+	
+	///===get and set methods==============///
 	
 }

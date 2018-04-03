@@ -3,8 +3,13 @@
  */
 package view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
+import model.GameConstants;
+import model.Piece;
+import model.Square;
 import controller.GameEngine;
 
 
@@ -27,10 +32,9 @@ public class BoardView
 	private void initialize()
 	
 	{
-		//TODO- remove test print
 		System.out.println("You are in initialize -BoardView");
-		System.out.println(gameEngine.getPlayerA().getPlayername());
-		System.out.println(gameEngine.getPlayerB().getPlayername());
+		//System.out.println(gameEngine.getPlayerA().getPlayername());
+		//System.out.println(gameEngine.getPlayerB().getPlayername());
 	}
 	
 	public void display()
@@ -49,6 +53,37 @@ public class BoardView
 				}
 			}
 		});
+	}
+	
+	public void highLightMoveScope(ArrayList<Square> argSquares)
+	{
+		Square[][] board_squares = boardFrame.getSquares();
+		int numOfW = GameConstants.NUMBER_OF_BOARD_SQUARE;
+		int numOfH = GameConstants.NUMBER_OF_BOARD_SQUARE;
+		for (int i=0;i<numOfW; i++)
+		{
+			for(int j=0;j<numOfH; j++)
+			{
+				Piece piece = board_squares[i][j].getPiece();
+				if (piece == null)
+				{
+					if ((i + j) % 2 != 0)
+					{
+						board_squares[i][j].setBackground(Color.BLACK);
+					} else
+					{
+						board_squares[i][j].setBackground(Color.WHITE);
+					}
+				}
+				for(int k=0; k<argSquares.size(); k++)
+				{
+					if (i==argSquares.get(k).getPositionX() && j==argSquares.get(k).getPositionY())
+					{
+						board_squares[i][j].setBackground(Color.GREEN);
+					}
+				}
+			}
+		}
 	}
 
 }

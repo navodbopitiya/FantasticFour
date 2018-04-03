@@ -1,15 +1,11 @@
 import controller.GameEngine;
 
 /**
- * this is the main entrance of the application
- */
-
-/**
  * @author Jason.Zhuang
  * @studentId s3535252
  * Mar 28, 2018
  * Application.java
- * Describe:
+ * Describe: this is the main entrance of the application
  */
 public class Application
 {
@@ -24,6 +20,11 @@ public class Application
 		//gameEngine.startMainMenu();
 		gameEngine.initialize("Player A", "Player B", 30);
 		gameEngine.openBoardView(gameEngine);
+	}
+
+	public static GameEngine getGameEngine()
+	{
+		return gameEngine;
 	}
 
 }

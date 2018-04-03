@@ -3,6 +3,9 @@
  */
 package model;
 
+import java.util.HashMap;
+
+import view.LegendPanel;
 import model.GameConstants.PLAYER_SIDE;
 
 /**
@@ -25,39 +28,33 @@ public class Player
 	/**
 	 * to store pieces in the legend area
 	 */
-	private Piece[] piecesLegend;
+	private HashMap<Integer, LegendSquare> legendSquare;
 	
 	/**
 	 * to hold the pieces in the board
 	 */
-	private Piece[] pieces;
+	private HashMap<String, Piece> boardPieces;
+	
+	/**
+	 * get the Legend Panel belong to this player
+	 */
+	private LegendPanel legendPanel; 
+	
+	/**
+	 * to present if the player has moved
+	 */
+	private boolean moved;
 	
 	
 	public Player(PLAYER_SIDE sidePosition,String name)
 	{
-		int num = GameConstants.NUMBER_OF_LEGEND_SQUARE * GameConstants.NUMBER_OF_PIECES_LEGEND;
-		this.sidePosition = sidePosition;
-		this.piecesLegend = new Piece[num];
-		if (sidePosition==PLAYER_SIDE.NORTH)
-		{
-			piecesLegend[0] = new Soldier();
-			piecesLegend[1] = new Soldier();
-			piecesLegend[2] = new Soldier();
-			piecesLegend[3] = new Soldier();
-			piecesLegend[4] = new Soldier();
-			piecesLegend[5] = new Soldier();
-		}
-		if (sidePosition==PLAYER_SIDE.SOUTH)
-		{
-			piecesLegend[0] = new Soldier();
-			piecesLegend[1] = new Soldier();
-			piecesLegend[2] = new Soldier();
-			piecesLegend[3] = new Soldier();
-			piecesLegend[4] = new Soldier();
-			piecesLegend[5] = new Soldier();
-		}
-		
 		this.playername = name;
+		
+		this.sidePosition = sidePosition;
+		
+		this.legendSquare = new HashMap<Integer, LegendSquare>();
+
+		this.boardPieces = new HashMap<String, Piece>();
 	}
 	
 	public String getPlayername()
@@ -70,14 +67,24 @@ public class Player
 		this.playername = playername;
 	}
 
-	public Piece[] getPieces()
+	public HashMap<Integer, LegendSquare> getLegendSquare()
 	{
-		return pieces;
+		return legendSquare;
 	}
 
-	public void setPieces(Piece[] pieces)
+	public void setLegendSquare(HashMap<Integer, LegendSquare> legendSquare)
 	{
-		this.pieces = pieces;
+		this.legendSquare = legendSquare;
+	}
+
+	public HashMap<String, Piece> getBoardPieces()
+	{
+		return boardPieces;
+	}
+
+	public void setBoardPieces(HashMap<String, Piece> boardPieces)
+	{
+		this.boardPieces = boardPieces;
 	}
 
 	public PLAYER_SIDE getSidePosition()
@@ -90,41 +97,24 @@ public class Player
 		this.sidePosition = sidePosition;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
-	public Piece selectPiece()
+	public LegendPanel getLegendPanel()
 	{
-		return null;
-		
+		return legendPanel;
+	}
+
+	public void setLegendPanel(LegendPanel legendPanel)
+	{
+		this.legendPanel = legendPanel;
+	}
+
+	public boolean isMoved()
+	{
+		return moved;
+	}
+
+	public void setMoved(boolean moved)
+	{
+		this.moved = moved;
 	}
 	
-	/**
-	 * 
-	 */
-	public void setPiece(){
-		
-	}
-	
-	/**
-	 * 
-	 */
-	public void movePiece(){
-		
-	}
-	
-	/**
-	 * 
-	 */
-	public void attackPiece(){
-		
-	}
-	
-	/**
-	 * 
-	 */
-	public void captureFlag(){
-		
-	}
 }

@@ -3,55 +3,47 @@
  */
 package model;
 
-import java.awt.Color;
+import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 
 /**
  * @author Jason.Zhuang
- * @studentId s3535252
- * Mar 27, 2018
- * LegendSquare.java
+ * @studentId s3535252 
+ * Mar 27, 2018 
+ * LegendSquare.java 
  * Describe:
  */
+@SuppressWarnings("serial")
 public class LegendSquare extends JButton
 {
-	private static final long serialVersionUID = -8422737525395379963L;
-
 	private int squareID = 0;
-	
-	private Piece[] pieces = new Piece[GameConstants.NUMBER_OF_PIECES_LEGEND];
-	
+
+	private ArrayList<Piece> pieces = new ArrayList<Piece>();
+
 	public LegendSquare(int id)
 	{
 		this.squareID = id;
-		this.setBackground(Color.ORANGE);
-	}
-	
-	public void addPiece(Piece piece,int num)
-	{
-		if ( num > GameConstants.NUMBER_OF_PIECES_LEGEND )
-		{
-			return;
-		}
-		for (int i=0;i<num; i++)
-		{
-			if (pieces[i] == null)
-			{
-				pieces[i] = piece;
-				break;
-			}
-		}
+		this.setPreferredSize(
+				new Dimension(GameConstants.SIZE_OF_SQUARE + 10,
+				GameConstants.SIZE_OF_SQUARE + 10));
+		this.setBackground(null);
 	}
 
-	public Piece[] getPieces()
+	public ArrayList<Piece> getPieces()
 	{
 		return pieces;
+	}
+
+	public void setPieces(ArrayList<Piece> pieces)
+	{
+		this.pieces = pieces;
 	}
 
 	public int getSquareID()
 	{
 		return squareID;
 	}
-	
+
 }
