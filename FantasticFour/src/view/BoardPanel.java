@@ -6,7 +6,7 @@ import model.GameConstants;
 import model.Square;
 
 @SuppressWarnings("serial")
-public class BoardPanel extends JPanel
+public class BoardPanel extends JPanel implements IBoardPanel
 {
 	private int boardWidth = 0;
 	

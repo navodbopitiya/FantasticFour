@@ -57,7 +57,7 @@ public class BoardView
 	
 	public void highLightMoveScope(ArrayList<Square> argSquares)
 	{
-		Square[][] board_squares = boardFrame.getSquares();
+		Square[][] board_squares = boardFrame.getBoardPanel().getSquares();
 		int numOfW = GameConstants.NUMBER_OF_BOARD_SQUARE;
 		int numOfH = GameConstants.NUMBER_OF_BOARD_SQUARE;
 		for (int i=0;i<numOfW; i++)

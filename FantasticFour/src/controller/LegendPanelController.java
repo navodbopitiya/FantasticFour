@@ -47,66 +47,7 @@ public class LegendPanelController
 		this.player = player;
 	}
 	
-	public void addPieceToSquare(LegendSquare square,Piece piece)
-	{
-		String imag_name = "resources\\" + piece.getName() + ".png";
-		ImageIcon piece_icon = new ImageIcon(imag_name);
-		square.setIcon(piece_icon);
-		square.getPieces().add(piece);
-		int sz = square.getPieces().size();
-		String txt = sz + "/" + GameConstants.NUMBER_OF_PIECES_LEGEND;
-		
-		TitledBorder titleBorder = new TitledBorder(
-				UIManager.getBorder("TitledBorder.border"), txt,
-				TitledBorder.RIGHT, TitledBorder.CENTER, null,
-				Color.DARK_GRAY);
-		square.setBorder(titleBorder);
-		
-		square.setEnabled(false);
-	}
-	
-	public void removePieceFromSquare(LegendSquare square,Piece piece)
-	{
-		ArrayList<Piece> pieces = square.getPieces();
-		int sz = 0;
-		if (pieces!=null)
-		{
-			sz = pieces.size();
-		}else
-		{
-			return;
-		}
-		
-		if (pieces.size()>0)
-		{
-			for(int i=0; i<sz; i++)
-			{
-				if (pieces.get(i)== piece)
-				{
-					square.getPieces().remove(i);
-					
-					String txt = square.getPieces().size() + "/"
-							+ GameConstants.NUMBER_OF_PIECES_LEGEND;
-					
-					TitledBorder titleBorder = new TitledBorder(
-							UIManager.getBorder("TitledBorder.border"), txt,
-							TitledBorder.RIGHT, TitledBorder.CENTER, null,
-							Color.DARK_GRAY);
-					
-					square.setBorder(titleBorder);
-					
-					
-					if (square.getPieces().size()== 0)
-					{
-						square.setEnabled(false);
-					}
-					break;
-				}
-			}
-		}
-	}
-	
-	public LegendPanel getLegendPanel()
+	public LegendPanel initPanel()
 	{
 		legendPanel = new LegendPanel(player);
 		
@@ -230,6 +171,65 @@ public class LegendPanelController
 		}
 		
 		return null;
+	}
+	
+	public void addPieceToSquare(LegendSquare square,Piece piece)
+	{
+		String imag_name = "resources\\" + piece.getName() + ".png";
+		ImageIcon piece_icon = new ImageIcon(imag_name);
+		square.setIcon(piece_icon);
+		square.getPieces().add(piece);
+		int sz = square.getPieces().size();
+		String txt = sz + "/" + GameConstants.NUMBER_OF_PIECES_LEGEND;
+		
+		TitledBorder titleBorder = new TitledBorder(
+				UIManager.getBorder("TitledBorder.border"), txt,
+				TitledBorder.RIGHT, TitledBorder.CENTER, null,
+				Color.DARK_GRAY);
+		square.setBorder(titleBorder);
+		
+		square.setEnabled(false);
+	}
+	
+	public void removePieceFromSquare(LegendSquare square,Piece piece)
+	{
+		ArrayList<Piece> pieces = square.getPieces();
+		int sz = 0;
+		if (pieces!=null)
+		{
+			sz = pieces.size();
+		}else
+		{
+			return;
+		}
+		
+		if (pieces.size()>0)
+		{
+			for(int i=0; i<sz; i++)
+			{
+				if (pieces.get(i)== piece)
+				{
+					square.getPieces().remove(i);
+					
+					String txt = square.getPieces().size() + "/"
+							+ GameConstants.NUMBER_OF_PIECES_LEGEND;
+					
+					TitledBorder titleBorder = new TitledBorder(
+							UIManager.getBorder("TitledBorder.border"), txt,
+							TitledBorder.RIGHT, TitledBorder.CENTER, null,
+							Color.DARK_GRAY);
+					
+					square.setBorder(titleBorder);
+					
+					
+					if (square.getPieces().size()== 0)
+					{
+						square.setEnabled(false);
+					}
+					break;
+				}
+			}
+		}
 	}
 	
 	public void setLegendEnable(Boolean flag)

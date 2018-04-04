@@ -1,6 +1,10 @@
 package model;
 
-public abstract class  Piece {
+import java.util.ArrayList;
+
+
+public abstract class  Piece 
+{
 	
 	/*
 	 * a piece:
@@ -25,6 +29,8 @@ public abstract class  Piece {
 	protected int attackRange;
 	
 	protected int[] moveDirections;
+	
+	protected ArrayList<Square> avalaibleMovements;
 	
 	protected int[] attackDirections;
 	
@@ -58,10 +64,14 @@ public abstract class  Piece {
 		
 		return true;
 	}
-
-	//abstract method
-	public abstract void move();
-	public abstract void attack();
+	
+	/**
+	 * @param @pre source must be a Square with a piece
+	 * @param @pre target must be a Square without a piece 
+	 */
+	public abstract void move(Square source, Square target);
+	
+	public abstract void attack(Square source, Square target, Piece enemy);
 
 	// get and set /////////////////////
 	public String getId()

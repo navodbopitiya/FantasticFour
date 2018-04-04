@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 
+import view.BoardPanel;
 import model.GameConstants;
 import model.GameConstants.GAME_STATE;
 import model.GameConstants.PLAYER_SIDE;
@@ -17,7 +18,6 @@ import model.LegendSquare;
 import model.Piece;
 import model.Player;
 import model.Square;
-import view.BoardPanel;
 
 /**
  * @author Jason.Zhuang
@@ -38,7 +38,7 @@ public class BoardPanelController
 		this.squares = new Square[GameConstants.NUMBER_OF_BOARD_SQUARE][GameConstants.NUMBER_OF_BOARD_SQUARE];
 	}
 
-	public BoardPanel initBoardPanel()
+	public BoardPanel initPanel()
 	{
 		board_panel = new BoardPanel();
 		board_panel.setLayout(new GridLayout(numberOfX, numberOfY));
@@ -144,6 +144,11 @@ public class BoardPanelController
 		}
 	}
 
+	/**
+	 * @param square
+	 * @param piece
+	 * @return true or false
+	 */
 	public boolean addPieceToBoardSquare(Square square,Piece piece)
 	{
 		if (square.isOccupied() == false)
@@ -160,6 +165,7 @@ public class BoardPanelController
 			
 			return true;
 		}
+		
 		return false;
 	}
 	

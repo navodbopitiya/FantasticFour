@@ -9,18 +9,13 @@ import java.awt.Label;
 import javax.swing.JPanel;
 
 import model.GameConstants;
-import model.GameConstants.PLAYER_SIDE;
 import model.LegendSquare;
 import model.Player;
+import model.GameConstants.PLAYER_SIDE;
 
-public class LegendPanel extends JPanel
+@SuppressWarnings("serial")
+public class LegendPanel extends JPanel implements ILegendPanel
 {
-	private static final long serialVersionUID = 1L;
-
-	private Player player;
-	
-	private PLAYER_SIDE sidePosition;
-	
 	private int boardWidth;
 	
 	private int boardHeight;
@@ -28,6 +23,10 @@ public class LegendPanel extends JPanel
 	private int legendWidth;
 	
 	private int legendHeight;
+	
+	private Player player;
+	
+	private PLAYER_SIDE sidePosition;
 	
 	private Label lblPlayerName; 
 

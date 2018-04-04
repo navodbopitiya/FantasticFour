@@ -1,5 +1,6 @@
 package model;
 
+
 public class Soldier extends Piece
 {
 	public Soldier(String id)
@@ -9,34 +10,24 @@ public class Soldier extends Piece
 		this.moveDirections = new int[]{1,2,3,4,5,6,7,8};
 		this.moveMax = 1;
 	}
-
+	
 	@Override
-	public void move() {
-		// check if it is player turn
-		// check for obstruction(if the square is occupied, do not allow)
-		
-		// If selected square is within MOVE_MAX range, return new location x,y
-		// If north = (x, y+MOVE_MAX) 
-		// If east = (x+MOVE_MAX, y)
-		// If northEast =(x+MOVE_MAX, y+MOVE_MAX)
-		
-		// return the square selected 
-		
+	public void move(Square source, Square target)
+	{
+		target.setPiece(source.getPiece());
+		target.setIcon(source.getIcon());
+		target.setOccupied(true);
+		//
+		source.setIcon(null);
+		source.setPiece(null);
+		source.setOccupied(false);
+		System.out.println("Soldier has moved.");
 	}
 
 	@Override
-	public void attack() {
-		//Soldier attack: removing piece that's within its movement range
+	public void attack(Square source, Square target, Piece enemy)
+	{
 		
 	}
-
-	
-	
-	//move 1 step
-	//Direction: 360
-	//Attack type: slash
-	
-	//Attack and move are the same 
-	//Some piece dont though
 
 }

@@ -11,18 +11,24 @@ public class Crasher extends Piece
 	}
 
 	@Override
-	public void move() 
+	public void move(Square source, Square target)
 	{
-		
+		target.setPiece(source.getPiece());
+		target.setIcon(source.getIcon());
+		target.setOccupied(true);
+		//
+		source.setIcon(null);
+		source.setPiece(null);
+		source.setOccupied(false);	
+		System.out.println("Crasher has moved.");
 	}
 
 	@Override
-	public void attack() 
+	public void attack(Square source, Square target, Piece enemy)
 	{
+		// TODO Auto-generated method stub
 		
 	}
-
-	
 	
 	
 

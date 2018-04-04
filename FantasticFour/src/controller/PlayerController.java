@@ -72,11 +72,11 @@ public class PlayerController
 				{
 					if (getCurrentSquare()!=null)
 					{
-						if (movePiece(getCurrentSquare(), arg_square) == true)
-						{
-							getPlayer().setMoved(true);
-							GameEngine.changePlayer();
-						}
+						PieceMovement pm = new PieceMovement();
+						pm.setCurrentSquare(getCurrentSquare());
+						pm.move(pm.getCurrentSquare(), arg_square);
+						getPlayer().setMoved(true);
+						GameEngine.changePlayer();
 					}
 				}
 			}
@@ -87,6 +87,11 @@ public class PlayerController
 		
 	}
 	
+	/**
+	 * @param @pre source must be a Square with a piece
+	 * @param @pre target must be a Square without a piece 
+	 * @return true or false
+	 */
 	public boolean movePiece(Square source, Square target)
 	{
 		target.setPiece(source.getPiece());

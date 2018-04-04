@@ -38,24 +38,27 @@ public class CurrentPiece extends Piece
 	{
 		this.pieceIdx = pieceIdx;
 	}
-	/* (non-Javadoc)
-	 * @see model.Piece#move()
-	 */
+	
 	@Override
-	public void move()
+	public void move(Square source, Square target)
+	{
+		target.setPiece(source.getPiece());
+		target.setIcon(source.getIcon());
+		target.setOccupied(true);
+		//
+		source.setIcon(null);
+		source.setPiece(null);
+		source.setOccupied(false);
+	}
+	
+	@Override
+	public void attack(Square source, Square target, Piece enemy)
 	{
 		// TODO Auto-generated method stub
 		
 	}
-	/* (non-Javadoc)
-	 * @see model.Piece#attack()
-	 */
-	@Override
-	public void attack()
-	{
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 	
 	
 }

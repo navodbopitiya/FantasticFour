@@ -166,7 +166,8 @@ public class GameEngine implements CheckGameState
 		}
 	}
 	
-	public GameEngine(){
+	public GameEngine()
+	{
 		startMainMenu();
 	}
 	

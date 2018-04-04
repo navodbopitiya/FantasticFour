@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import model.GameConstants;
 import model.GameConstants.PLAYER_SIDE;
 import model.Player;
-import model.Square;
 import controller.BoardPanelController;
 import controller.GameEngine;
 import controller.LegendPanelController;
@@ -29,11 +28,11 @@ public class Board extends JFrame
 
 	private int boardHeight = 0;
 
-	private Square[][] squares;
-
 	private LegendPanel legendPanelA;
 	
 	private LegendPanel legendPanelB;
+	
+	private BoardPanel boardPanel;
 
 	// Direction: NORTH, SOUTH, EAST, WEST
 	// change the coordinate according to the direction selected
@@ -56,16 +55,14 @@ public class Board extends JFrame
 	public void setBoardPanel()
 	{
 		BoardPanelController bpController = new BoardPanelController();
-		bpController.initBoardPanel();
-		BoardPanel bp = bpController.getBoard_panel(); 
-		this.squares  = bp.getSquares(); 
-		this.getContentPane().add(bp);
+		this.boardPanel = bpController.initPanel();
+		this.getContentPane().add(boardPanel);
 	}
 
 	public void setLegendPanel(Player argPlayer)
 	{
 		LegendPanelController lgC = new LegendPanelController(argPlayer);
-		LegendPanel legendPanel = lgC.getLegendPanel();
+		LegendPanel legendPanel = lgC.initPanel();
 		argPlayer.setLegendPanel(legendPanel);
 		
 		if (argPlayer == GameEngine.getCurrentPlayer())
@@ -89,16 +86,6 @@ public class Board extends JFrame
 	
 	
 	//========================================//
-	public Square[][] getSquares()
-	{
-		return squares;
-	}
-
-	public void setSquares(Square[][] squares)
-	{
-		this.squares = squares;
-	}
-
 	public LegendPanel getLegendPanelA()
 	{
 		return legendPanelA;
@@ -118,6 +105,35 @@ public class Board extends JFrame
 	{
 		this.legendPanelB = legendPanelB;
 	}
-	
 
+	public int getBoardWidth()
+	{
+		return boardWidth;
+	}
+
+	public void setBoardWidth(int boardWidth)
+	{
+		this.boardWidth = boardWidth;
+	}
+
+	public int getBoardHeight()
+	{
+		return boardHeight;
+	}
+
+	public void setBoardHeight(int boardHeight)
+	{
+		this.boardHeight = boardHeight;
+	}
+
+	public BoardPanel getBoardPanel()
+	{
+		return boardPanel;
+	}
+
+	public void setBoardPanel(BoardPanel boardPanel)
+	{
+		this.boardPanel = boardPanel;
+	}
+	
 }
