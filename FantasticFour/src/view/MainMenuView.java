@@ -3,11 +3,14 @@ package view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import controller.GameEngine;
@@ -47,30 +50,30 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().setLayout(null);
 		
 		/* Label for Player One Text Field*/
-		JLabel lblPlayerOne = new JLabel("Player One");
-		lblPlayerOne.setForeground(Color.ORANGE);
-		lblPlayerOne.setFont(new Font("Arial", Font.BOLD, 13));
-		lblPlayerOne.setBounds(58, 80, 120, 23);
-		frame.getContentPane().add(lblPlayerOne);
+		JLabel lblPlayerA = new JLabel("Player One");
+		lblPlayerA.setForeground(Color.ORANGE);
+		lblPlayerA.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPlayerA.setBounds(58, 80, 120, 23);
+		frame.getContentPane().add(lblPlayerA);
 		
 		/*TextField for Player One*/
-		JTextField playerOneTextField = new JTextField();
-		playerOneTextField.setBounds(174, 80, 168, 23);
-		frame.getContentPane().add(playerOneTextField);
-		playerOneTextField.setColumns(10);
+		final JTextField playerATextField = new JTextField();
+		playerATextField.setBounds(174, 80, 168, 23);
+		frame.getContentPane().add(playerATextField);
+		playerATextField.setColumns(10);
 		
 		/* Label for Player Two Text Field*/
-		JLabel lblPlayerTwo = new JLabel("Player Two");
-		lblPlayerTwo.setForeground(Color.ORANGE);
-		lblPlayerTwo.setFont(new Font("Arial", Font.BOLD, 13));
-		lblPlayerTwo.setBounds(58, 120, 120, 23);
-		frame.getContentPane().add(lblPlayerTwo);
+		JLabel lblPlayerB = new JLabel("Player Two");
+		lblPlayerB.setForeground(Color.ORANGE);
+		lblPlayerB.setFont(new Font("Arial", Font.BOLD, 13));
+		lblPlayerB.setBounds(58, 120, 120, 23);
+		frame.getContentPane().add(lblPlayerB);
 		
 		/*TextField for Player Two*/
-		JTextField playerTwoTextField = new JTextField();
-		playerTwoTextField.setBounds(174, 120, 168, 23);
-		frame.getContentPane().add(playerTwoTextField);
-		playerTwoTextField.setColumns(10);
+		final JTextField playerBTextField = new JTextField();
+		playerBTextField.setBounds(174, 120, 168, 23);
+		frame.getContentPane().add(playerBTextField);
+		playerBTextField.setColumns(10);
 		
 		/* Label for TimerText Field*/
 		JLabel timerlbl = new JLabel("Round Time (s)");
@@ -80,34 +83,39 @@ public class MainMenuView extends JFrame {
 		frame.getContentPane().add(timerlbl);
 
 		/*TextField for Timer*/
-		JTextField timerTextField = new JTextField();
+		final JTextField timerTextField = new JTextField();
 		timerTextField.setBounds(174, 160, 168, 23);
 		frame.getContentPane().add(timerTextField);
 		timerTextField.setColumns(10);
 		
 		/* Play button action */
 		JButton btnPlay = new JButton("Play");
-		btnPlay.setBackground(Color.ORANGE);
-//		btnPlay.addActionListener(
-//				
-//				new ActionListener() 
-//				{
-//				public void actionPerformed(ActionEvent arg0) {
-//					if (playerOneTextField.getText() != null && playerTwoTextField.getText() != null
-//							&& timerTextField.getText() != null) { /*Check for null fields */
-//						if (PATTERN.matcher(timerTextField.getText()).matches()) { /*Check for non-numeric inputs for timer using a pattern*/
-//							/*Set player and timer data in gameEngine*/
-//							gameEngine.setPlayerOneName(playerOneTextField.getText());
-//							gameEngine.setPlayerTwoName(playerTwoTextField.getText());
-//							gameEngine.setTimerValue(Integer.parseInt(timerTextField.getText()));
-//							gameEngine.printText();
-//						}
-//	
-//					}
-//					
-//			}
-//
-//		});
+		btnPlay.setBackground(Color.ORANGE);	
+		btnPlay.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				if (!playerATextField.getText().isEmpty() && !playerBTextField.getText().isEmpty() 
+						&& !timerTextField.getText().isEmpty()) { //Check for null fields 
+					if (PATTERN.matcher(timerTextField.getText()).matches()) { //Check for non-numeric inputs for timer using a pattern
+						//Set player and timer data in gameEngine
+						gameEngine.initialize(playerATextField.getText(), playerBTextField.getText(), Integer.parseInt(timerTextField.getText()));
+						frame.dispose();
+					}else{
+						//If the timerValue is non-numeric
+						JOptionPane.showMessageDialog(frame, "Please enter a numeric value for timer");
+					}
+
+				}else{
+				 //If there is even one field empty
+					JOptionPane.showMessageDialog(frame, "Please enter all fields");
+				}
+				
+				
+			}
+			
+		});
 		btnPlay.setBounds(174, 210, 79, 23);
 		frame.getContentPane().add(btnPlay);
 

@@ -119,14 +119,15 @@ public class GameEngine implements CheckGameState
 		initPlayer(PlayerA_name, PlayerB_name);
 		this.timerValue = timerValue;
 		initBoard();
+		openBoardView();
 	}
 	
 	/**
 	 * open the BoardView
 	 */
-	public void openBoardView(GameEngine gameEngine)
+	public void openBoardView()
 	{
-		boardView = new BoardView(gameEngine);
+		boardView = new BoardView(this);
 		boardView.display();
 	}
 	
@@ -163,6 +164,10 @@ public class GameEngine implements CheckGameState
 			LegendPanelController lpController = new LegendPanelController(currentPlayer);
 			lpController.setLegendEnable(true);
 		}
+	}
+	
+	public GameEngine(){
+		startMainMenu();
 	}
 	
 	/**

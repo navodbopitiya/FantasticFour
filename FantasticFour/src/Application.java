@@ -17,14 +17,6 @@ public class Application
 	public static void main(String[] args)
 	{
 		gameEngine = new GameEngine();
-		//gameEngine.startMainMenu();
-		gameEngine.initialize("Player A", "Player B", 30);
-		gameEngine.openBoardView(gameEngine);
-	}
-
-	public static GameEngine getGameEngine()
-	{
-		return gameEngine;
 	}
 
 }
