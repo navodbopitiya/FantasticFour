@@ -268,15 +268,6 @@ public class LegendPanelController
 	
 	private void squareClickForLegend(LegendSquare square,int idx, Player player)
 	{
-		Player currentPlayer = GameEngine.getCurrentPlayer();
-		
-		if (!player.getPlayername().equals(currentPlayer.getPlayername()))
-		{
-			JOptionPane.showMessageDialog(null, "It is not your turn","Message"
-					, JOptionPane.PLAIN_MESSAGE);
-			return;
-		}
-		
 		LegendPanel lp = player.getLegendPanel();
 		LegendSquare[] ls = lp.getLegendSquares();
 		for (int i=0;i<ls.length;i++)
