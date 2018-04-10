@@ -21,7 +21,7 @@ public class GameEngine implements CheckGameState
 	 * the game state
 	 * could be NITIALIZED, SETTLE, PLAYING, PAUSED, GAMEOVER
 	 */
-	private static GAME_STATE gameStauts = GAME_STATE.INITIALIZED;
+	private static GAME_STATE gameStatus = GAME_STATE.INITIALIZED;
 	
 	/**
 	 * Access the Board class
@@ -159,13 +159,14 @@ public class GameEngine implements CheckGameState
 			startGame();
 		}
 		
-		if (gameStauts==GAME_STATE.INITIALIZED)
+		if (gameStatus==GAME_STATE.INITIALIZED)
 		{
 			LegendPanelController lpController = new LegendPanelController(currentPlayer);
 			lpController.setLegendEnable(true);
 		}
 	}
 	
+	/* Constructor */
 	public GameEngine()
 	{
 		startMainMenu();
@@ -176,7 +177,7 @@ public class GameEngine implements CheckGameState
 	 */
 	public static void startGame()
 	{
-		gameStauts=GAME_STATE.PLAYING;
+		gameStatus=GAME_STATE.PLAYING;
 	}
 	
 	/**
@@ -191,12 +192,12 @@ public class GameEngine implements CheckGameState
 
 	public static GAME_STATE getGameStauts()
 	{
-		return gameStauts;
+		return gameStatus;
 	}
 
 	public static void setGameStauts(GAME_STATE gameStauts)
 	{
-		GameEngine.gameStauts = gameStauts;
+		GameEngine.gameStatus = gameStauts;
 	}
 
 	public Board getBoardFrame()
