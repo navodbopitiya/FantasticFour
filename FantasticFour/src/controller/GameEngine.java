@@ -6,10 +6,10 @@ import javax.swing.JFrame;
 
 import model.GameConstants.GAME_STATE;
 import model.GameConstants.PLAYER_SIDE;
+import model.Board;
 import model.LegendSquare;
 import model.Piece;
 import model.Player;
-import view.Board;
 import view.BoardView;
 import view.MainMenuView;
 

@@ -17,6 +17,7 @@ import javax.swing.border.TitledBorder;
 
 import model.Crasher;
 import model.GameConstants;
+import model.LegendPanel;
 import model.GameConstants.GAME_STATE;
 import model.GameConstants.PLAYER_SIDE;
 import model.LegendSquare;
@@ -27,7 +28,6 @@ import model.Player;
 import model.Soldier;
 import model.SpatialController;
 import model.Witcher;
-import view.LegendPanel;
 
 /**
  * @author Jason.Zhuang

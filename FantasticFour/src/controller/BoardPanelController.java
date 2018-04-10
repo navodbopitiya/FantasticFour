@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 
-import view.BoardPanel;
+import model.BoardPanel;
 import model.GameConstants;
 import model.GameConstants.GAME_STATE;
 import model.GameConstants.PLAYER_SIDE;

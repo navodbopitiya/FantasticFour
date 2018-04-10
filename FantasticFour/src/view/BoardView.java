@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.ArrayList;
 
+import model.Board;
 import model.GameConstants;
 import model.Piece;
 import model.Square;

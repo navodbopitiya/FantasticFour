@@ -6,11 +6,11 @@ package controller;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import model.BoardPanel;
 import model.GameConstants;
 import model.Piece;
 import model.Player;
 import model.Square;
-import view.BoardPanel;
 import view.BoardView;
 
 /**

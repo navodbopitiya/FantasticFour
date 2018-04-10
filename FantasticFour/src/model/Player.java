@@ -6,7 +6,6 @@ package model;
 import java.util.HashMap;
 
 import model.GameConstants.PLAYER_SIDE;
-import view.LegendPanel;
 
 /**
  * @author Navod Bopitiya

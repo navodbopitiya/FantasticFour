@@ -5,7 +5,7 @@ package controller;
 
 import java.util.ArrayList;
 
-import view.BoardPanel;
+import model.BoardPanel;
 import model.GameConstants;
 import model.Piece;
 import model.Square;
