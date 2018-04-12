@@ -299,7 +299,7 @@ public class LegendPanelController
 			return;
 		}
 		
-		if (GameEngine.getGameStauts() == GAME_STATE.INITIALIZED)
+		if (GameEngine.getGameStatus() == GAME_STATE.INITIALIZED)
 		{
 			int numOfPieces = GameConstants.NUMBER_OF_LEGEND_SQUARE * GameConstants.NUMBER_OF_PIECES_LEGEND;
 
@@ -310,7 +310,7 @@ public class LegendPanelController
 			{
 				JOptionPane.showMessageDialog(null, "You havn't placed all pieces.","Message", JOptionPane.PLAIN_MESSAGE);
 			}
-		}else if (GameEngine.getGameStauts() == GAME_STATE.PLAYING)
+		}else if (GameEngine.getGameStatus() == GAME_STATE.PLAYING)
 		{
 			if (player.isMoved() == false)
 			{

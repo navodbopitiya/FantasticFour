@@ -93,11 +93,11 @@ public class BoardPanelController
 	private void squareClickForBoard(Square square)
 	{
 		Player player = GameEngine.getCurrentPlayer();
-		if (GameEngine.getGameStauts()== GAME_STATE.INITIALIZED)
+		if (GameEngine.getGameStatus()== GAME_STATE.INITIALIZED)
 		{
 			initBoardPiece(player, square);
 		}
-		if (GameEngine.getGameStauts()== GAME_STATE.PLAYING)
+		if (GameEngine.getGameStatus()== GAME_STATE.PLAYING)
 		{
 			playBoardPiece(player, square);
 		}

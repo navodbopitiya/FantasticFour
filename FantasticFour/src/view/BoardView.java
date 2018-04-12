@@ -20,6 +20,7 @@ public class BoardView
 	
 	private GameEngine gameEngine;
 
+	/*Constructor*/
 	public BoardView(GameEngine gameEngine)
 	{
 		this.gameEngine = gameEngine;
@@ -34,8 +35,6 @@ public class BoardView
 	
 	{
 		System.out.println("You are in initialize -BoardView");
-		//System.out.println(gameEngine.getPlayerA().getPlayername());
-		//System.out.println(gameEngine.getPlayerB().getPlayername());
 	}
 	
 	public void display()

@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -36,7 +37,7 @@ public class GameEngine implements CheckGameState
 	/**
 	 * Access the playerB class
 	 */
-	private static Player playerB;
+	private static  Player playerB;
 	
 	/**
 	 * whose turn
@@ -190,12 +191,12 @@ public class GameEngine implements CheckGameState
 	}
 	///===get and set methods==============///
 
-	public static GAME_STATE getGameStauts()
+	public static GAME_STATE getGameStatus()
 	{
 		return gameStatus;
 	}
 
-	public static void setGameStauts(GAME_STATE gameStauts)
+	public static void setGameStatus(GAME_STATE gameStauts)
 	{
 		GameEngine.gameStatus = gameStauts;
 	}

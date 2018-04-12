@@ -17,6 +17,10 @@ import controller.GameEngine;
 
 public class MainMenuView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	public static final Pattern PATTERN = Pattern.compile("^\\d+$"); //pattern for numeric inputs
 	private GameEngine gameEngine;
