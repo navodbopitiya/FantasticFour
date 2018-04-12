@@ -25,17 +25,9 @@ public class BoardView
 	{
 		this.gameEngine = gameEngine;
 		this.boardFrame = gameEngine.getBoardFrame();
-		initialize();
 	}
 	
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize()
-	
-	{
-		System.out.println("You are in initialize -BoardView");
-	}
+
 	
 	public void display()
 	{
